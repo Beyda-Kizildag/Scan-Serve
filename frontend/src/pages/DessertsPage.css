@@ -1,0 +1,123 @@
+/* DessertsPage.css */
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+        url("/images/homepage-background.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Genel sayfa düzeni */
+.desserts-container {
+    min-height: 100vh;
+    padding: 2rem;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Başlık */
+.desserts-title {
+    text-align: center;
+    color: #d81b60;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    /* Harfleri büyük yap */
+}
+
+/* Kategori başlıkları */
+.category-title {
+    color: #ad1457;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+/* Tatlı kartları düzeni */
+.desserts-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* Tatlı kartları */
+.dessert-card {
+    flex: 1 1 calc(25% - 1.5rem);
+    /* Her kart ekranın %25'ini kaplasın, arada boşluk olsun */
+    max-width: 300px;
+    /* Maksimum genişlik */
+    padding: 1rem;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dessert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dessert-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.dessert-card-title {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Sepet kontrol düğmeleri */
+.cart-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* İkonları ortala */
+    gap: 0.5rem;
+}
+
+.cart-controls button {
+    background-color: #d81b60;
+    /* Daha belirgin bir arka plan rengi */
+    color: #fff;
+    /* Beyaz yazı rengi */
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-controls button:hover {
+    background-color: #ad1457;
+    /* Hover durumunda daha koyu bir renk */
+}
+
+/* Animasyonlu kartlar için ilk görünüm */
+.motion-category {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* motion.div ile gelen görünüm animasyonları, CSS fallback olarak kalabilir */
+.motion-category-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}

@@ -1,0 +1,106 @@
+.teas-container {
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-header {
+    position: relative;
+    margin-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.home-icon,
+.cart-icon {
+    color: #388e3c;
+    transition: color 0.3s ease;
+}
+
+.home-icon:hover,
+.cart-icon:hover {
+    color: #2e7d32;
+}
+
+.teas-title {
+    color: #2e7d32;
+    font-weight: 900;
+    font-size: 2.8rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.teas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.tea-card {
+    flex: 1 1 calc(25% - 1.5rem);
+    max-width: 300px;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tea-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tea-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.tea-card-title {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.tea-card-price {
+    color: #000;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.cart-controls {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-controls button {
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.3rem 0.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-controls button:hover {
+    background-color: #2e7d32;
+}

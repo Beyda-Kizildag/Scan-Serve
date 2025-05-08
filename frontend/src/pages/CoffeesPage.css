@@ -1,0 +1,137 @@
+/* Genel sayfa düzeni */
+.coffees-container {
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, #efebe9 0%, #d7ccc8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Üst başlık düzeni */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 2rem;
+}
+
+/* Kahveler başlığı */
+.coffees-title {
+    text-align: center;
+    color: #4e342e;
+    font-weight: 800;
+    font-size: 2.8rem;
+    flex-grow: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+}
+
+/* Kategori başlıkları */
+.category-title {
+    color: #5d4037;
+    font-weight: 900;
+    /* Artırıldı */
+    margin-bottom: 2rem;
+    /* Daha fazla boşluk */
+    font-size: 2.2rem;
+    /* Artırıldı */
+    text-align: center;
+    letter-spacing: 1px;
+    /* Daha estetik */
+    text-transform: uppercase;
+    /* Modern görünüm için */
+}
+
+
+/* Kategori kutusu */
+.coffee-category-box {
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
+    /* Kategoriler arası boşluk */
+}
+
+/* Kahve kartları düzeni */
+.coffees-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    /* Artırıldı: Kutular arası boşluk */
+    justify-content: center;
+    margin-top: 1.5rem;
+    /* Eklendi: Başlıkla kutular arası boşluk */
+}
+
+
+/* Kahve kartları */
+.coffee-card {
+    flex: 1 1 calc(100% - 1.5rem);
+    max-width: 300px;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgba(250, 250, 250, 0.95);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coffee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.coffee-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.coffee-card-title {
+    color: #3e2723;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+}
+
+.coffee-card-description {
+    font-size: 0.95rem;
+    color: #5d4037;
+    margin-bottom: 0.5rem;
+}
+
+.coffee-card-price {
+    color: #4e342e;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Sepet kontrol butonları */
+.cart-controls button {
+    background-color: #a1887f;
+    /* Açık kahve tonu */
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cart-controls button:hover {
+    background-color: #6d4c41;
+    /* Daha koyu kahve tonu */
+}
+
+
+.cart-controls button:hover {
+    background-color: #4e342e;
+}
