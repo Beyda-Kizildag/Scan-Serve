@@ -7,6 +7,7 @@ import com.qrmenu.grmenu.repository.MenuItemRepository;
 import com.qrmenu.grmenu.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -20,6 +21,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
@@ -41,16 +45,16 @@ public class DataInitializer implements CommandLineRunner {
         userRepository.deleteAll();
 
         // Admin
-        userRepository.save(new User("admin", "admin123", "ADMIN"));
+        userRepository.save(new User("admin", passwordEncoder.encode("admin123"), "ADMIN"));
 
         // Garsonlar
-        userRepository.save(new User("waiter1", "waiter123", "WAITER"));
-        userRepository.save(new User("waiter2", "waiter123", "WAITER"));
-        userRepository.save(new User("waiter3", "waiter123", "WAITER"));
+        userRepository.save(new User("waiter1", passwordEncoder.encode("waiter123"), "WAITER"));
+        userRepository.save(new User("waiter2", passwordEncoder.encode("waiter123"), "WAITER"));
+        userRepository.save(new User("waiter3", passwordEncoder.encode("waiter123"), "WAITER"));
 
         // Müşteriler
-        userRepository.save(new User("customer1", "customer123", "CUSTOMER"));
-        userRepository.save(new User("customer2", "customer123", "CUSTOMER"));
+        userRepository.save(new User("customer1", passwordEncoder.encode("customer123"), "CUSTOMER"));
+        userRepository.save(new User("customer2", passwordEncoder.encode("customer123"), "CUSTOMER"));
 
         // Sıcak Kahveler
         List<MenuItem> hotCoffees = Arrays.asList(
