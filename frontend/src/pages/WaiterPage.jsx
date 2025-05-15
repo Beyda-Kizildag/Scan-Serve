@@ -5,13 +5,13 @@ import { Button, Paper, Typography, Box } from '@mui/material';
 const initialOrders = [
     {
         id: '1',
-        customerName: 'Ali Veli',
+        tableNumber: 17,
         items: ['Latte', 'Cheesecake'],
         status: 'pending'
     },
     {
         id: '2',
-        customerName: 'Ayşe Yılmaz',
+        tableNumber: 5,
         items: ['Çay', 'Baklava'],
         status: 'pending'
     }
@@ -37,7 +37,7 @@ export default function WaiterPage() {
             {orders.length === 0 && <Typography>Bekleyen sipariş yok.</Typography>}
             {orders.map(order => (
                 <Paper key={order.id} sx={{ p: 2, mb: 2 }}>
-                    <Typography>Müşteri: {order.customerName}</Typography>
+                    <Typography>Masa No: {order.tableNumber}</Typography>
                     <Typography>Ürünler: {order.items.join(', ')}</Typography>
                     <Button
                         variant="contained"
