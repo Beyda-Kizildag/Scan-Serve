@@ -1,0 +1,68 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+target/
+build/
+dist/
+dist-ssr/
+
+# Local env files
+.env
+.env.*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE settings
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Java class files
+*.class
+
+# Maven/Gradle
+.mvn/
+.settings/
+.gradle/
+log/
+*.war
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Spring Tool Suite
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# Ignore generated or uploaded content
+.qodo/
+frontend/src/hooks/
+frontend/src/services/
+frontend/src/types/
+backend/src/main/resources/static/images/
+backend/src/main/resources/templates/
