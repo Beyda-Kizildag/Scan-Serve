@@ -5,7 +5,6 @@ import com.qrmenu.grmenu.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,7 @@ public class OrderController {
     // Create a new order
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
+        order.setStatus("pending");
         Order savedOrder = orderRepository.save(order);
         return ResponseEntity.ok(savedOrder);
     }
@@ -29,6 +29,27 @@ public class OrderController {
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderRepository.findAll();
         return ResponseEntity.ok(orders);
+    }
+
+    // Get pending orders
+    @GetMapping("/pending")
+    public ResponseEntity<List<Order>> getPendingOrders() {
+        List<Order> orders = orderRepository.findByStatus("pending");
+        return ResponseEntity.ok(orders);
+    }
+
+    // Approve an order
+    @PostMapping("/{id}/approve")
+    public ResponseEntity<Order> approveOrder(@PathVariable String id) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setStatus("approved");
+            Order savedOrder = orderRepository.save(order);
+            return ResponseEntity.ok(savedOrder);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // Get order by ID
