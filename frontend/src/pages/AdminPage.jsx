@@ -9,6 +9,12 @@ import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon from MUI ico
 const AdminDashboard = () => {
     const navigate = useNavigate();
 
+    const handleLogout = () => {
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("user");
+        navigate("/");
+    };
+
     return (
         <Box sx={{ px: 3, py: 5 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 4, position: 'relative' }}>
@@ -80,6 +86,21 @@ const AdminDashboard = () => {
                     </Paper>
                 </Grid>
             </Grid>
+
+            <button
+                onClick={handleLogout}
+                style={{
+                    marginTop: 20,
+                    padding: "10px 20px",
+                    background: "#d81b60",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer"
+                }}
+            >
+                Çıkış Yap
+            </button>
         </Box>
     );
 };

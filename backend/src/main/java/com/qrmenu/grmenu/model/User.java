@@ -10,7 +10,7 @@ public class User {
     private String id;
     private String name;
     private String password;
-    private String role; // ADMIN, WAITER, CUSTOMER
+    private String role; // ADMIN, WAITER
 
     public User() {
     }

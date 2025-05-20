@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Paper, Typography, Box } from '@mui/material';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Paper, Typography, Box } from "@mui/material";
+
 
 export default function WaiterPage() {
     const [orders, setOrders] = useState([]);
@@ -15,6 +17,15 @@ export default function WaiterPage() {
         const interval = setInterval(fetchOrders, 5000); // Poll every 5 seconds
         return () => clearInterval(interval); // Cleanup
     }, []);
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("user");
+        navigate("/");
+    };
+
 
     const handleApprove = (orderId) => {
         fetch(`http://localhost:8080/api/orders/${orderId}/approve`, {
@@ -46,6 +57,15 @@ export default function WaiterPage() {
                     </Button>
                 </Paper>
             ))}
+
+            <Button
+                variant="contained"
+                color="error"
+                onClick={handleLogout}
+                sx={{ mt: 3 }}
+            >
+                Çıkış Yap
+            </Button>
         </Box>
     );
 }

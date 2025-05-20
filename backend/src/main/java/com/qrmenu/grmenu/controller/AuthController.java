@@ -1,48 +1,45 @@
-// package com.qrmenu.grmenu.controller;
+package com.qrmenu.grmenu.controller;
 
-// import org.springframework.web.bind.annotation.RestController;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.CrossOrigin;
-// import org.springframework.http.ResponseEntity;
-// // import com.qrmenu.grmenu.dto.LoginRequest; // LoginRequest'in doğru paketini kullanın
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
-// @RestController
-// @RequestMapping("/api/auth")
-// @CrossOrigin(origins = "http://localhost:5173") // Sadece frontend portunu ekledik
-// public class AuthController {
+import com.qrmenu.grmenu.repository.UserRepository;
+import com.qrmenu.grmenu.dto.LoginRequest;
+import com.qrmenu.grmenu.model.User;
 
-//     @PostMapping("/login")
-//     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-//         // Giriş işlemleri burada
-//         // Başarılıysa token ve userRole dön
-//         return ResponseEntity.ok().build(); // Geçici dönüş
-//     }
+import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
-//     // LoginResponse sınıfını geri döndür mapping işlemi yaparak
-//     // @PostMapping("/login")
-//     // public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-//     //     // Örnek: Kullanıcı adı ve şifreyi kontrol et (gerçek projede servis katmanı ile yapılmalı)
-//     //     String username = request.getUsername();
-//     //     String password = request.getPassword();
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173") // Sadece frontend portunu ekledik
+public class AuthController {
 
-//     //     // Örnek admin kontrolü
-//     //     if ("admin".equals(username) && "admin123".equals(password)) {
-//     //         // Token üretimini burada yapmalısınız (örnek olarak sabit string)
-//     //         String token = "admin-token";
-//     //         String userRole = "admin";
-//     //         return ResponseEntity.ok(new LoginResponse(token, userRole));
-//     //     }
+    @Autowired
+    private UserRepository userRepository;
 
-//     //     // Örnek müşteri kontrolü (gerçek projede veritabanı sorgusu olmalı)
-//     //     if ("customer1".equals(username) && "customer123".equals(password)) {
-//     //         String token = "customer-token";
-//     //         String userRole = "customer";
-//     //         return ResponseEntity.ok(new LoginResponse(token, userRole));
-//     //     }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+Optional<User> userOpt = userRepository.findByName(request.getName());
 
-//     //     // Hatalı giriş
-//     //     return ResponseEntity.status(401).body(null);
-//     // }
-// }
+if (userOpt.isPresent() && userOpt.get().getPassword().equals(request.getPassword())) {
+    User user = userOpt.get();
+    Map<String, String> response = new HashMap<>();
+    response.put("status", "success");
+    response.put("role", user.getRole());
+    response.put("name", user.getName()); // BURAYA DİKKAT: `getName()`
+    return ResponseEntity.ok(response);
+}
+ else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Kullanıcı adı veya şifre yanlış");
+        }
+    }
+
+}
