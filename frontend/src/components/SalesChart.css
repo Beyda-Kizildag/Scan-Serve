@@ -1,0 +1,54 @@
+.sales-chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.selector-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.monthly-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    /* Daha yakın konum */
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: #f5f5f5;
+    border-left: 5px solid #3f51b5;
+    padding: 1rem;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #5e3c24;
+}
+
+.stat-card p {
+    margin: 0.5rem 0 0;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .monthly-stats {
+        flex-direction: column;
+        align-items: center;
+    }
+}

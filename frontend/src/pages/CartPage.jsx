@@ -15,7 +15,27 @@ export default function CartPage() {
     };
 
     const handleConfirmOrder = () => {
-        alert('Siparişiniz alındı ve hazırlanıyor!');
+        const order = {
+            userId: "user123", // Replace with actual user ID if available
+            tableNumber: 5,    // Replace with actual table number if available
+            items: Object.values(cart),
+            totalPrice: Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0),
+            timestamp: Date.now()
+        };
+
+        fetch('http://localhost:8080/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(() => {
+                alert('Siparişiniz alındı ve hazırlanıyor!');
+                // Optionally clear cart here
+            })
+            .catch(() => {
+                alert('Sipariş gönderilemedi!');
+            });
     };
 
     return (
