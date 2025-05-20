@@ -1,13 +1,21 @@
 import { Typography, Grid, Paper, Divider } from '@mui/material';
+import { Tooltip, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CakeIcon from '@mui/icons-material/Cake';
 import CoffeeIcon from '@mui/icons-material/Coffee';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import LoginIcon from '@mui/icons-material/Login'; // Giriş ikonu eklendi
 import './HomePage.css';
 
 export default function HomePage() {
     return (
         <div className="home-container">
+            {/* Giriş ikonu sağ üst köşe */}
+            <div style={{ position: 'absolute', top: 20, right: 30 }}>
+                <Tooltip title="Kurumsal Giriş">
+                    <Link to="/login"><IconButton size="large" sx={{ color: '#d81b60' }}><LoginIcon fontSize="large" /></IconButton></Link>
+                </Tooltip>
+            </div>
             <Typography
                 variant="h3"
                 sx={{

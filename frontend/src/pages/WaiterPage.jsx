@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Paper, Typography, Box } from '@mui/material';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Paper, Typography, Box } from "@mui/material";
 
 // Örnek sipariş verisi (backend olmadan)
 const initialOrders = [
@@ -19,6 +20,15 @@ const initialOrders = [
 
 export default function WaiterPage() {
     const [orders, setOrders] = useState(initialOrders);
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("user");
+        navigate("/");
+    };
+
 
     const handleApprove = (orderId) => {
         setOrders(prevOrders =>
@@ -52,6 +62,15 @@ export default function WaiterPage() {
                     )}
                 </Paper>
             ))}
+
+            <Button
+                variant="contained"
+                color="error"
+                onClick={handleLogout}
+                sx={{ mt: 3 }}
+            >
+                Çıkış Yap
+            </Button>
         </Box>
     );
 }
