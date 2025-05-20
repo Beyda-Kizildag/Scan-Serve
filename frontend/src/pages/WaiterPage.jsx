@@ -1,34 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Paper, Typography, Box } from '@mui/material';
 
-// Örnek sipariş verisi (backend olmadan)
-const initialOrders = [
-    {
-        id: '1',
-        tableNumber: 17,
-        items: ['Latte', 'Cheesecake'],
-        status: 'pending'
-    },
-    {
-        id: '2',
-        tableNumber: 5,
-        items: ['Çay', 'Baklava'],
-        status: 'pending'
-    }
-];
-
 export default function WaiterPage() {
-    const [orders, setOrders] = useState(initialOrders);
+    const [orders, setOrders] = useState([]);
+
+    const fetchOrders = () => {
+        fetch('http://localhost:8080/api/orders/pending')
+            .then(res => res.json())
+            .then(data => setOrders(data));
+    };
+
+    useEffect(() => {
+        fetchOrders(); // Initial fetch
+        const interval = setInterval(fetchOrders, 5000); // Poll every 5 seconds
+        return () => clearInterval(interval); // Cleanup
+    }, []);
 
     const handleApprove = (orderId) => {
-        setOrders(prevOrders =>
-            prevOrders.map(order =>
-                order.id === orderId
-                    ? { ...order, status: 'approved' }
-                    : order
-            )
-        );
-        alert('Sipariş alındı!');
+        fetch(`http://localhost:8080/api/orders/${orderId}/approve`, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(() => {
+                setOrders(prevOrders =>
+                    prevOrders.filter(order => order.id !== orderId)
+                );
+                alert('Sipariş alındı!');
+            });
     };
 
     return (
@@ -38,18 +36,14 @@ export default function WaiterPage() {
             {orders.map(order => (
                 <Paper key={order.id} sx={{ p: 2, mb: 2 }}>
                     <Typography>Masa No: {order.tableNumber}</Typography>
-                    <Typography>Ürünler: {order.items.join(', ')}</Typography>
+                    <Typography>Ürünler: {order.items.map(item => item.name).join(', ')}</Typography>
                     <Button
                         variant="contained"
                         color="success"
                         onClick={() => handleApprove(order.id)}
-                        disabled={order.status === 'approved'}
                     >
                         Onayla
                     </Button>
-                    {order.status === 'approved' && (
-                        <Typography color="green">Sipariş alındı!</Typography>
-                    )}
                 </Paper>
             ))}
         </Box>

@@ -10,6 +10,7 @@ public class Order {
     @Id
     private String id;
     private String userId;
+    private int tableNumber;
     private List<MenuItem> items;
     private double totalPrice;
     private String status; // e.g., "Pending", "Completed"
