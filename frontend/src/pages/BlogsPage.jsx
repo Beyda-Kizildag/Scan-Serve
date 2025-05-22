@@ -1,5 +1,15 @@
-import { Box, Typography, TextField, Button, Grid, Paper } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import {
+    Box,
+    Typography,
+    TextField,
+    Button,
+    Grid,
+    Paper,
+} from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function BlogsPage() {
     const [blogs, setBlogs] = useState([]);
@@ -17,21 +27,37 @@ export default function BlogsPage() {
             sx={{
                 minHeight: '100vh',
                 padding: '2rem',
-                backgroundColor: '#f5f5f5',
+                background: 'linear-gradient(135deg, #ffe0e9 0%, #f5f5f5 100%)',
             }}
         >
-            <Typography
-                variant="h4"
+            {/* Üst Menü */}
+            <Box
                 sx={{
-                    fontWeight: 'bold',
-                    color: '#d81b60',
-                    marginBottom: '2rem',
-                    textAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    mb: 4,
                 }}
             >
-                Renkli Bloglar
-            </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Link to="/" style={{ textDecoration: 'none' }}>
+                        <HomeIcon fontSize="large" sx={{ color: '#d81b60' }} />
+                    </Link>
+                    <Typography
+                        variant="h4"
+                        sx={{
+                            fontWeight: 'bold',
+                            color: '#d81b60',
+                            textAlign: 'center',
+                        }}
+                    >
+                        Kafe Blogları
+                    </Typography>
+                </Box>
+            </Box>
 
+
+            {/* Blog Ekleme Alanı */}
             <Box
                 sx={{
                     display: 'flex',
@@ -46,32 +72,51 @@ export default function BlogsPage() {
                     value={newBlog}
                     onChange={(e) => setNewBlog(e.target.value)}
                     sx={{ width: '100%', maxWidth: '600px', marginBottom: '1rem' }}
+                    multiline
+                    rows={3}
                 />
                 <Button
                     variant="contained"
-                    sx={{ backgroundColor: '#d81b60', color: '#fff' }}
+                    sx={{
+                        backgroundColor: '#d81b60',
+                        color: '#fff',
+                        '&:hover': {
+                            backgroundColor: '#ad1457',
+                        },
+                    }}
                     onClick={handleAddBlog}
                 >
                     Paylaş
                 </Button>
             </Box>
 
-            <Grid container spacing={3}>
+            {/* Blog Kartları */}
+            <Grid container spacing={3} justifyContent="center">
                 {blogs.map((blog, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Paper
-                            elevation={3}
-                            sx={{
-                                padding: '1rem',
-                                borderRadius: '10px',
-                                textAlign: 'center',
-                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                            }}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                            <Typography variant="body1" sx={{ color: '#333' }}>
-                                {blog}
-                            </Typography>
-                        </Paper>
+                            <Paper
+                                elevation={4}
+                                sx={{
+                                    padding: '1.5rem',
+                                    borderRadius: '15px',
+                                    textAlign: 'center',
+                                    backgroundColor: '#ffffff',
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <Typography variant="body1" sx={{ color: '#333', fontSize: '1rem' }}>
+                                    {blog}
+                                </Typography>
+                            </Paper>
+                        </motion.div>
                     </Grid>
                 ))}
             </Grid>

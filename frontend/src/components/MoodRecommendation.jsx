@@ -20,22 +20,22 @@ const moodOptions = [
         label: 'Yorgun 😴',
         icon: <HotelIcon color="secondary" />,
         suggestion: 'Bir fincan espresso seni ayağa kaldırır! ☕',
-        image: '/images/desserts/drinks/espresso.jpg',
-        link: '/urunler/espresso',
+        image: '/images/coffees/hot/espresso.jpg',
+        link: '/coffees', // Not: yanlış yazılmış olabilir, 'coffees' mi olmalı?
     },
     {
         label: 'Romantik 💕',
         icon: <FavoriteIcon color="secondary" />,
-        suggestion: 'Yaseminli çay eşliğinde güzel bir sohbet seni bekliyor 🍵',
-        image: '/images/desserts/drinks/yasemin.jpg',
-        link: '/urunler/yasemin-cayi',
+        suggestion: 'Adaçayı eşliğinde güzel bir sohbet seni bekliyor 🍵',
+        image: '/images/teas/herbal/sage.jpg',
+        link: '/teas',
     },
     {
         label: 'Enerjik ⚡',
         icon: <BoltIcon color="secondary" />,
-        suggestion: 'Brownie ve double shot latte seni daha da hızlandırır! 🍫⚡',
-        image: '/images/desserts/cakes/brownie.jpg',
-        link: '/urunler/brownie-latte',
+        suggestion: 'Brownie seni daha da hızlandırır! 🍫⚡',
+        image: '/images/desserts/specialty/brownie.jpg',
+        link: '/desserts',
     },
 ];
 
@@ -103,21 +103,23 @@ export default function MoodRecommendation() {
                             {selectedMood.suggestion}
                         </Typography>
 
-                        {selectedMood.image && (
-                            <img
-                                src={selectedMood.image}
-                                alt={selectedMood.label}
-                                style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    maxHeight: '250px',
-                                    objectFit: 'cover', // veya 'contain' alternatif olarak
-                                    borderRadius: '16px',
-                                    display: 'block',
-                                    margin: '0 auto',
-                                }}
-                            />
-                        )}
+                        <Box
+                            component="img"
+                            src={selectedMood.image}
+                            alt={selectedMood.label}
+                            sx={{
+                                width: '100%',
+                                aspectRatio: '1 / 1', // Kare görünüm
+                                objectFit: 'cover',
+                                borderRadius: '20px',
+                                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.2)',
+                                marginBottom: 2,
+                                transition: 'transform 0.3s ease',
+                                '&:hover': {
+                                    transform: 'scale(1.02)',
+                                },
+                            }}
+                        />
 
                         <Button
                             variant="contained"
