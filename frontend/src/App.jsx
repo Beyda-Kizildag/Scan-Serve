@@ -10,6 +10,7 @@ import { CartProvider } from './context/CartContext';
 import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
 import WaiterPage from "./pages/WaiterPage";
+import CommentsPage from './pages/CommentsPage';
 
 // Admin için route guard
 const PrivateAdminRoute = ({ children }) => {
@@ -45,6 +46,7 @@ function App() {
           <Route path="/teas" element={<TeasPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/comments" element={<CommentsPage />} />
         </Routes>
       </Router>
     </CartProvider>

@@ -18,6 +18,7 @@ public class MenuItem {
     private Category category;  // Ürün kategorisi (örn: Pizza, İçecek)
     private boolean available; // Ürünün mevcut olup olmadığı
     private String imageUrl;    // Ürün resminin URL'i
+    
 
     // Constructor
     public MenuItem() {}

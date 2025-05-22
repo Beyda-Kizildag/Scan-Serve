@@ -1,80 +1,101 @@
 package com.qrmenu.grmenu.controller;
 
 import com.qrmenu.grmenu.model.Order;
-import com.qrmenu.grmenu.repository.OrderRepository;
+import com.qrmenu.grmenu.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Siparişlerle ilgili tüm HTTP endpoint'lerini yöneten controller sınıfıdır.
+ * Sipariş oluşturma, listeleme, durum güncelleme gibi işlemleri yönetir.
+ */
 @RestController
 @RequestMapping("/api/orders")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // Tüm kaynaklardan gelen istekleri kabul eder (CORS)
 public class OrderController {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
-    // Create a new order
+    /**
+     * Yeni bir sipariş oluşturur.
+     * Örnek istek: POST /api/orders
+     * @param order Frontend'den gelen sipariş nesnesi
+     * @return Oluşturulan siparişi döner
+     */
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        order.setStatus("pending");
-        Order savedOrder = orderRepository.save(order);
+        Order savedOrder = orderService.createOrder(order);
         return ResponseEntity.ok(savedOrder);
     }
 
-    // Get all orders
+    /**
+     * Tüm siparişleri getirir.
+     * @return Sipariş listesi
+     */
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() {
-        List<Order> orders = orderRepository.findAll();
-        return ResponseEntity.ok(orders);
+        return ResponseEntity.ok(orderService.getAllOrders());
     }
 
-    // Get pending orders
+    /**
+     * Beklemede olan (pending) siparişleri getirir.
+     * @return Pending sipariş listesi
+     */
     @GetMapping("/pending")
     public ResponseEntity<List<Order>> getPendingOrders() {
-        List<Order> orders = orderRepository.findByStatus("pending");
-        return ResponseEntity.ok(orders);
+        return ResponseEntity.ok(orderService.getOrdersByStatus("pending"));
     }
 
-    // Approve an order
+    /**
+     * Belirli bir siparişi onaylar (durumunu "approved" yapar).
+     * @param id Siparişin ID'si
+     * @return Onaylanmış sipariş veya 404
+     */
     @PostMapping("/{id}/approve")
     public ResponseEntity<Order> approveOrder(@PathVariable String id) {
-        Optional<Order> optionalOrder = orderRepository.findById(id);
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.setStatus("approved");
-            Order savedOrder = orderRepository.save(order);
-            return ResponseEntity.ok(savedOrder);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Optional<Order> approvedOrder = orderService.approveOrder(id);
+        return approvedOrder.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Get order by ID
+    /**
+     * ID'ye göre tek bir siparişi getirir.
+     * @param id Siparişin ID'si
+     * @return Sipariş nesnesi veya 404
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable String id) {
-        Optional<Order> order = orderRepository.findById(id);
-        return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<Order> order = orderService.getOrderById(id);
+        return order.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Update an order
+    /**
+     * Mevcut bir siparişi günceller.
+     * @param id Güncellenecek siparişin ID'si
+     * @param updatedOrder Yeni sipariş verisi
+     * @return Güncellenmiş sipariş veya 404
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable String id, @RequestBody Order updatedOrder) {
-        return orderRepository.findById(id).map(existingOrder -> {
-            updatedOrder.setId(id);
-            Order savedOrder = orderRepository.save(updatedOrder);
-            return ResponseEntity.ok(savedOrder);
-        }).orElseGet(() -> ResponseEntity.notFound().build());
+        return orderService.updateOrder(id, updatedOrder)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Delete an order
+    /**
+     * Siparişi veritabanından siler.
+     * @param id Silinecek siparişin ID'si
+     * @return 200 OK veya 404
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
-        return orderRepository.findById(id).map(order -> {
-            orderRepository.delete(order);
-            return ResponseEntity.ok().<Void>build();
-        }).orElseGet(() -> ResponseEntity.notFound().build());
+        boolean deleted = orderService.deleteOrder(id);
+        return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }

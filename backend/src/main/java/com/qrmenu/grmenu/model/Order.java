@@ -2,7 +2,6 @@ package com.qrmenu.grmenu.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 
 @Document(collection = "orders")
@@ -11,21 +10,23 @@ public class Order {
     private String id;
     private String userId;
     private int tableNumber;
-    private List<MenuItem> items;
+    private List<OrderItem> items; // Artık MenuItem değil, OrderItem listesi
     private double totalPrice;
     private String status; // e.g., "Pending", "Completed"
     private long timestamp;
 
     public Order() {}
 
-    public Order(String userId, List<MenuItem> items, double totalPrice, String status, long timestamp) {
+    public Order(String userId, int tableNumber, List<OrderItem> items, double totalPrice, String status, long timestamp) {
         this.userId = userId;
+        this.tableNumber = tableNumber;
         this.items = items;
         this.totalPrice = totalPrice;
         this.status = status;
         this.timestamp = timestamp;
     }
 
+    // Getters and setters
     public String getId() {
         return id;
     }
@@ -42,11 +43,19 @@ public class Order {
         this.userId = userId;
     }
 
-    public List<MenuItem> getItems() {
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public void setItems(List<MenuItem> items) {
+    public void setItems(List<OrderItem> items) {
         this.items = items;
     }
 

@@ -8,7 +8,7 @@ import { useCart } from '../context/CartContext';
 import './CartPage.css';
 
 export default function CartPage() {
-    const { cart, addToCart, removeFromCart } = useCart();
+    const { cart, addToCart, removeFromCart, clearCart } = useCart();
 
     const calculateTotal = () => {
         return Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0);
@@ -28,14 +28,21 @@ export default function CartPage() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(order)
         })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Sunucudan hata kodu geldi!");
+                }
+                return res.json();
+            })
             .then(() => {
                 alert('Siparişiniz alındı ve hazırlanıyor!');
-                // Optionally clear cart here
+                clearCart();
             })
-            .catch(() => {
+            .catch((err) => {
+                console.error("Hata:", err);
                 alert('Sipariş gönderilemedi!');
             });
+
     };
 
     return (
