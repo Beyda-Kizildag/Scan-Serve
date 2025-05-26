@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/menu-item")
@@ -84,5 +85,24 @@ public class MenuItemController {
                     return ResponseEntity.ok().<Void>build();
                 })
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+   @PatchMapping("/{id}/favorite")
+    public ResponseEntity<MenuItem> favoriteMenuItem(@PathVariable String id, @RequestBody Map<String, Boolean> body) {
+    Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(id);
+    if (optionalMenuItem.isPresent()) {
+        MenuItem menuItem = optionalMenuItem.get();
+        boolean increment = body.getOrDefault("increment", true);
+        int current = menuItem.getFavoriteCount() == null ? 0 : menuItem.getFavoriteCount();
+        if (increment) {
+            menuItem.setFavoriteCount(current + 1);
+        } else {
+            menuItem.setFavoriteCount(Math.max(0, current - 1));
+        }
+        menuItemRepository.save(menuItem);
+        return ResponseEntity.ok(menuItem);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
     }
 }

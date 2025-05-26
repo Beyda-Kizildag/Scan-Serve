@@ -14,6 +14,7 @@ public class Order {
     private double totalPrice;
     private String status; // e.g., "Pending", "Completed"
     private long timestamp;
+    private String note; // Sipariş notu
 
     public Order() {}
 
@@ -24,6 +25,7 @@ public class Order {
         this.totalPrice = totalPrice;
         this.status = status;
         this.timestamp = timestamp;
+        this.note = note;
     }
 
     // Getters and setters
@@ -81,5 +83,13 @@ public class Order {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+       this.note = note;
     }
 }

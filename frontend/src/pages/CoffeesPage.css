@@ -2,7 +2,7 @@
 .coffees-container {
     min-height: 100vh;
     padding: 2rem;
-    background: linear-gradient(135deg, #efebe9 0%, #d7ccc8 100%);
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,68 +22,52 @@
 .coffees-title {
     text-align: center;
     color: #4e342e;
-    font-weight: 800;
-    font-size: 2.8rem;
+    font-weight: bold;
+    font-size: 2.4rem;
     flex-grow: 1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 2px 2px 8px #d7ccc8;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0;
 }
 
 /* Kategori başlıkları */
 .category-title {
-    color: #5d4037;
-    font-weight: 900;
-    /* Artırıldı */
-    margin-bottom: 2rem;
-    /* Daha fazla boşluk */
-    font-size: 2.2rem;
-    /* Artırıldı */
+    color: #6d4c41;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
     text-align: center;
     letter-spacing: 1px;
-    /* Daha estetik */
     text-transform: uppercase;
-    /* Modern görünüm için */
-}
-
-
-/* Kategori kutusu */
-.coffee-category-box {
-    padding: 1.5rem;
-    border-radius: 15px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-    margin-bottom: 2rem;
-    /* Kategoriler arası boşluk */
+    text-shadow: 1px 1px 6px #d7ccc8;
 }
 
 /* Kahve kartları düzeni */
 .coffees-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-    /* Artırıldı: Kutular arası boşluk */
+    gap: 1.5rem;
     justify-content: center;
     margin-top: 1.5rem;
-    /* Eklendi: Başlıkla kutular arası boşluk */
 }
-
 
 /* Kahve kartları */
 .coffee-card {
-    flex: 1 1 calc(100% - 1.5rem);
+    flex: 1 1 calc(25% - 1.5rem);
     max-width: 300px;
     padding: 1rem;
     text-align: center;
     border-radius: 15px;
     background-color: rgba(250, 250, 250, 0.95);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.18);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .coffee-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.28);
 }
 
 .coffee-card img {
@@ -91,47 +75,80 @@
     height: auto;
     border-radius: 12px;
     margin-bottom: 1rem;
+    box-shadow: 0 2px 8px #d7ccc8, 0 0 32px 0 #a1887f44;
 }
 
+/* Kart başlığı */
 .coffee-card-title {
-    color: #3e2723;
-    font-weight: bold;
-    font-size: 1.3rem;
+    color: #4e342e;
+    font-weight: 700;
+    font-size: 1.15rem;
     margin: 0.5rem 0;
 }
 
+/* Açıklama */
 .coffee-card-description {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #5d4037;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
 }
 
+/* Fiyat */
 .coffee-card-price {
-    color: #4e342e;
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    color: #6d4c41;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
 }
 
 /* Sepet kontrol butonları */
+.cart-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 .cart-controls button {
     background-color: #a1887f;
-    /* Açık kahve tonu */
-    color: white;
+    color: #fff;
     border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 5px;
+    border-radius: 6px;
+    padding: 0.4rem 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    margin: 0 0.3rem;
+    transition: background 0.2s;
 }
 
 .cart-controls button:hover {
     background-color: #6d4c41;
-    /* Daha koyu kahve tonu */
 }
 
+/* Favori ikonu */
+.favorite-icon-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 4px 8px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
 
-.cart-controls button:hover {
-    background-color: #4e342e;
+/* Animasyonlu kartlar için ilk görünüm */
+.motion-category {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.motion-category-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }

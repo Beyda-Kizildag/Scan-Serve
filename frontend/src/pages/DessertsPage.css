@@ -79,21 +79,22 @@
 }
 
 .cart-controls button {
-    background-color: #d81b60;
-    /* Daha belirgin bir arka plan rengi */
+    background-color: #b39ddb;
+    /* orta lila */
     color: #fff;
-    /* Beyaz yazı rengi */
     border: none;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    border-radius: 6px;
+    padding: 0.4rem 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin: 0 0.3rem;
+    transition: background 0.2s;
 }
 
 .cart-controls button:hover {
-    background-color: #ad1457;
-    /* Hover durumunda daha koyu bir renk */
+    background-color: #9575cd;
+    /* hover için daha koyu lila */
 }
 
 /* Animasyonlu kartlar için ilk görünüm */
@@ -107,4 +108,23 @@
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.favorite-icon-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 4px 8px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.dessert-card {
+    position: relative;
+    /* ...diğer özellikler zaten mevcut */
 }

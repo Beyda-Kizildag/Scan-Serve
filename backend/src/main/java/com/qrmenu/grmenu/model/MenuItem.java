@@ -18,6 +18,7 @@ public class MenuItem {
     private Category category;  // Ürün kategorisi (örn: Pizza, İçecek)
     private boolean available; // Ürünün mevcut olup olmadığı
     private String imageUrl;    // Ürün resminin URL'i
+    private Integer favoriteCount = 0; // Favori sayısı alanı
     
 
     // Constructor
@@ -30,6 +31,7 @@ public class MenuItem {
         this.category = category;
         this.available = available;
         this.imageUrl = imageUrl;
+        this.favoriteCount = 0; // Başlangıçta 0 olarak ayarlanır
     }
 
     // Getters and Setters
@@ -87,5 +89,13 @@ public class MenuItem {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+     public Integer getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public void setFavoriteCount(Integer favoriteCount) {
+        this.favoriteCount = favoriteCount;
     }
 } 

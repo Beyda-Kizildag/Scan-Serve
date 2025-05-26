@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Typography, Button, IconButton, Grid, Paper } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Button, IconButton, Grid, Paper, TextField } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import HomeIcon from '@mui/icons-material/Home';
@@ -9,6 +9,7 @@ import './CartPage.css';
 
 export default function CartPage() {
     const { cart, addToCart, removeFromCart, clearCart } = useCart();
+    const [note, setNote] = useState('');
 
     const calculateTotal = () => {
         return Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0);
@@ -20,6 +21,7 @@ export default function CartPage() {
             tableNumber: 5,    // Replace with actual table number if available
             items: Object.values(cart),
             totalPrice: Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0),
+            note: note,
             timestamp: Date.now()
         };
 
@@ -37,6 +39,7 @@ export default function CartPage() {
             .then(() => {
                 alert('Siparişiniz alındı ve hazırlanıyor!');
                 clearCart();
+                setNote('');
             })
             .catch((err) => {
                 console.error("Hata:", err);
@@ -84,7 +87,28 @@ export default function CartPage() {
                 ))}
             </Grid>
 
-            <Box sx={{ marginTop: '2rem', textAlign: 'center' }}>
+            {/* Eklemek istedikleriniz kutusu */}
+            <Box sx={{ marginTop: '2.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+                <TextField
+                    label="Eklemek istedikleriniz"
+                    placeholder="Örneğin: Süt, limon, şeker, ekstra peçete..."
+                    multiline
+                    minRows={2}
+                    maxRows={4}
+                    value={note}
+                    onChange={e => setNote(e.target.value)}
+                    variant="outlined"
+                    sx={{
+                        width: '100%',
+                        maxWidth: 500,
+                        background: '#fff',
+                        borderRadius: 2,
+                        boxShadow: '0 2px 8px #f8bbd0',
+                    }}
+                />
+            </Box>
+
+            <Box sx={{ marginTop: '1rem', textAlign: 'center' }}>
                 <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#333', marginBottom: '1rem' }}>
                     Toplam: {calculateTotal()} TL
                 </Typography>

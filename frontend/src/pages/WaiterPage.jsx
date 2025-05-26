@@ -115,6 +115,10 @@ export default function WaiterPage() {
                                     ))}
                                 </Typography>
 
+                                <Typography>
+                                    Not: {order.note ? order.note : "Yok"}
+                                </Typography>
+
                                 <Typography sx={{ mb: 2 }}>
                                     <strong>Toplam Tutar:</strong> {order.totalPrice}₺
                                 </Typography>

@@ -1,45 +1,37 @@
+/* Genel sayfa düzeni */
 .teas-container {
     min-height: 100vh;
     padding: 2rem;
-    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.page-header {
-    position: relative;
-    margin-bottom: 2rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-}
-
-.home-icon,
-.cart-icon {
-    color: #388e3c;
-    transition: color 0.3s ease;
-}
-
-.home-icon:hover,
-.cart-icon:hover {
-    color: #2e7d32;
-}
-
+/* Başlık */
 .teas-title {
+    text-align: center;
     color: #2e7d32;
-    font-weight: 900;
-    font-size: 2.8rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
-    margin: 0 auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    letter-spacing: 2px;
 }
 
+/* Kategori başlıkları */
+.category-title {
+    color: #388e3c;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Çay kartları düzeni */
 .teas-grid {
     display: flex;
     flex-wrap: wrap;
@@ -47,6 +39,7 @@
     justify-content: center;
 }
 
+/* Çay kartları */
 .tea-card {
     flex: 1 1 calc(25% - 1.5rem);
     max-width: 300px;
@@ -54,13 +47,14 @@
     text-align: center;
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.18);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .tea-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.28);
 }
 
 .tea-card img {
@@ -68,39 +62,78 @@
     height: auto;
     border-radius: 12px;
     margin-bottom: 1rem;
+    box-shadow: 0 2px 8px #c8e6c9, 0 0 32px 0 #a5d6a744;
 }
 
 .tea-card-title {
-    color: #000;
+    color: #388e3c;
     font-weight: bold;
     font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.tea-card-description {
+    font-size: 1rem;
+    color: #388e3c;
+    margin-bottom: 8px;
 }
 
 .tea-card-price {
-    color: #000;
+    color: #2e7d32;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
 }
 
+/* Sepet kontrol butonları */
 .cart-controls {
-    margin-top: 0.5rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
 .cart-controls button {
-    background-color: #388e3c;
-    color: white;
+    background-color: #a5d6a7;
+    color: #2e7d32;
     border: none;
-    border-radius: 5px;
-    padding: 0.3rem 0.6rem;
-    font-size: 1rem;
+    border-radius: 6px;
+    padding: 0.4rem 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin: 0 0.3rem;
+    transition: background 0.2s;
 }
 
 .cart-controls button:hover {
-    background-color: #2e7d32;
+    background-color: #388e3c;
+    color: #fff;
+}
+
+/* Favori ikonu */
+.favorite-icon-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 4px 8px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+/* Animasyonlu kartlar için ilk görünüm */
+.motion-category {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.motion-category-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
