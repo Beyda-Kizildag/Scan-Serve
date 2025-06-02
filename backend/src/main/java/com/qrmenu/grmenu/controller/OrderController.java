@@ -54,11 +54,14 @@ public class OrderController {
     /**
      * Belirli bir siparişi onaylar (durumunu "approved" yapar).
      * @param id Siparişin ID'si
+     * @param waiterId Garson ID'si
      * @return Onaylanmış sipariş veya 404
      */
     @PostMapping("/{id}/approve")
-    public ResponseEntity<Order> approveOrder(@PathVariable String id) {
-        Optional<Order> approvedOrder = orderService.approveOrder(id);
+    public ResponseEntity<Order> approveOrder(
+            @PathVariable String id,
+            @RequestParam String waiterId) {
+        Optional<Order> approvedOrder = orderService.approveOrder(id, waiterId);
         return approvedOrder.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
 import WaiterPage from "./pages/WaiterPage";
 import CommentsPage from './pages/CommentsPage';
+import WaiterPerformancePage from './pages/WaiterPerformancePage';
 
 // Admin için route guard
 const PrivateAdminRoute = ({ children }) => {
@@ -47,6 +48,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/comments" element={<CommentsPage />} />
+          <Route path="/waiter-performance" element={<WaiterPerformancePage />} />
         </Routes>
       </Router>
     </CartProvider>

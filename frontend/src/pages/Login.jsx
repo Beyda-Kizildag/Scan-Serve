@@ -21,7 +21,11 @@ const Login = () => {
         setErrorMsg("");
         try {
             const data = await login(name, password);
-            localStorage.setItem("user", JSON.stringify(data));
+            localStorage.setItem("user", JSON.stringify({
+                id: data.id,
+                name: data.name,
+                role: data.role
+            }));
 
             if (!data.role) {
                 setErrorMsg("Rol bilgisi eksik!");

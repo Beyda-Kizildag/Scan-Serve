@@ -40,19 +40,25 @@ export default function WaiterPage() {
     };
 
     const handleApprove = (orderId, tableNumber) => {
-        fetch(`http://localhost:8080/api/orders/${orderId}/approve`, {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || !user.id) {
+            console.error('Garson bilgisi bulunamadı');
+            alert('Garson bilgisi bulunamadı. Lütfen tekrar giriş yapın.');
+            return;
+        }
+
+        fetch(`http://localhost:8080/api/orders/${orderId}/approve?waiterId=${user.id}`, {
             method: "POST",
         })
             .then(async (res) => {
                 if (!res.ok) {
-                    throw new Error("Onaylama işlemi başarısız");
+                    const errorText = await res.text();
+                    throw new Error(errorText || "Onaylama işlemi başarısız");
                 }
-                // JSON değilse sorun olmasın
-                const text = await res.text();
-                if (text) {
-                    console.log("Onay cevabı:", text);
-                }
-
+                return res.json();
+            })
+            .then((data) => {
+                console.log("Onay başarılı:", data);
                 setOrders((prevOrders) =>
                     prevOrders.filter((order) => order.id !== orderId)
                 );
@@ -60,6 +66,7 @@ export default function WaiterPage() {
             })
             .catch((error) => {
                 console.error("Onaylama hatası:", error);
+                alert('Sipariş onaylanırken bir hata oluştu: ' + error.message);
             });
     };
 

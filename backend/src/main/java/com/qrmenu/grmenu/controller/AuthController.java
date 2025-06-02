@@ -34,7 +34,8 @@ if (userOpt.isPresent() && userOpt.get().getPassword().equals(request.getPasswor
     Map<String, String> response = new HashMap<>();
     response.put("status", "success");
     response.put("role", user.getRole());
-    response.put("name", user.getName()); // BURAYA DİKKAT: `getName()`
+    response.put("name", user.getName());
+    response.put("id", user.getId());
     return ResponseEntity.ok(response);
 }
  else {
