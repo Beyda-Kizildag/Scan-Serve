@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/AuthService";
+import { authService } from "../services/AuthService";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { Box, Paper, Typography, TextField, Button, InputAdornment, IconButton } from "@mui/material";
@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault();
         setErrorMsg("");
         try {
-            const data = await login(name, password);
+            const data = await authService.login(name, password);
             localStorage.setItem("user", JSON.stringify({
                 id: data.id,
                 name: data.name,
