@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault();
         setErrorMsg("");
         try {
-            const data = await authService.login(name, password);
+            const data = await AuthService.login(name, password);
             localStorage.setItem("user", JSON.stringify({
                 id: data.id,
                 name: data.name,
