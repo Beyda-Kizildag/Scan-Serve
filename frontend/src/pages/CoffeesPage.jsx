@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
@@ -12,12 +12,18 @@ import { useCart } from '../context/CartContext';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Badge from '@mui/material/Badge';
 
+
+
 export default function CoffeesPage() {
     // Sepet işlemleri ve toplam ürün sayısı için context'ten fonksiyonları alıyoruz
     const { cart, addToCart, removeFromCart, getCartCount } = useCart();
     // Kahveler listesini ve favori durumlarını state olarak tutuyoruz
     const [coffees, setCoffees] = useState([]);
     const [favorited, setFavorited] = useState({});
+
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const tableNumber = params.get('tableName') ? Number(params.get('tableName')) : 5; // fallback to 5 if not present
 
     // Sayfa yüklendiğinde backend'den kahveleri çekiyoruz
     useEffect(() => {
@@ -130,7 +136,7 @@ export default function CoffeesPage() {
                 </Typography>
 
                 {/* Sepet ikonu ve ürün sayısı */}
-                <Link to="/cart" className="cart-icon"
+                <Link to={`/cart?tableName=${tableNumber}`} className="cart-icon"
                     style={{
                         display: 'flex',
                         alignItems: 'center'

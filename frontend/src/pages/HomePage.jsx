@@ -7,8 +7,16 @@ import CoffeeIcon from '@mui/icons-material/Coffee';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import LoginIcon from '@mui/icons-material/Login';
 import MoodRecommendation from '../components/MoodRecommendation';
+import { useLocation } from 'react-router-dom';
+
+
+
 
 export default function HomePage() {
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const tableNumber = params.get('tableName') ? Number(params.get('tableName')) : 5; // fallback to 5 if not present
+
     return (
         <Box
             sx={{
@@ -76,7 +84,7 @@ export default function HomePage() {
                 <Grid container spacing={4} justifyContent="center">
                     {[
                         { icon: <CakeIcon />, title: "Tatlılar", link: "/desserts" },
-                        { icon: <CoffeeIcon />, title: "Kahveler", link: "/coffees" },
+                        { icon: <CoffeeIcon />, title: "Kahveler", link: "/coffees"+`?tableName=${tableNumber }`},
                         { icon: <LocalCafeIcon />, title: "Çaylar", link: "/teas" }
                     ].map((item, index) => (
                         <Grid item xs={12} sm={6} md={4} key={index}>
