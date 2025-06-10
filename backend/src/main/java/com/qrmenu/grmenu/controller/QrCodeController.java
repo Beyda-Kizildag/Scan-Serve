@@ -12,9 +12,9 @@ import java.io.IOException;
 @RequestMapping("/api/qr")
 public class QrCodeController {
 
-    @GetMapping(value = "/table/{tableNumber}", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> getQrCode(@PathVariable int tableNumber) throws WriterException, IOException {
-        String url = "http://10.192.47.211:5173/menu?table=" + tableNumber;
+    @GetMapping(value = "/generate/{tableName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getQrCode(@PathVariable String tableName) throws WriterException, IOException {
+        String url = "http://localhost:5173?tableName=" + tableName;
         byte[] qrImage = QrCodeGenerator.generateQrCode(url, 300, 300);
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(qrImage);
     }

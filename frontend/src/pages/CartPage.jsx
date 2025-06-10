@@ -6,6 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './CartPage.css';
+import { useLocation } from 'react-router-dom';
 
 export default function CartPage() {
     const { cart, addToCart, removeFromCart, clearCart } = useCart();
@@ -14,11 +15,14 @@ export default function CartPage() {
     const calculateTotal = () => {
         return Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0);
     };
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const tableNumber = params.get('tableName') ? Number(params.get('tableName')) : 5; // fallback to 5 if not present
 
     const handleConfirmOrder = () => {
         const order = {
             userId: "user123", // Replace with actual user ID if available
-            tableNumber: 5,    // Replace with actual table number if available
+            tableNumber: tableNumber,    // Replace with actual table number if available
             items: Object.values(cart),
             totalPrice: Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0),
             note: note,
