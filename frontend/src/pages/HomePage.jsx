@@ -83,10 +83,9 @@ export default function HomePage() {
                 {/* Kartlar */}
                 <Grid container spacing={4} justifyContent="center">
                     {[
-                        { icon: <CakeIcon />, title: "Tatlılar", link: "/desserts" },
-                        { icon: <CoffeeIcon />, title: "Kahveler", link: "/coffees"+`?tableName=${tableNumber }`},
-                        { icon: <LocalCafeIcon />, title: "Çaylar", link: "/teas" }
-                    ].map((item, index) => (
+                        { icon: <CakeIcon />, title: "Tatlılar", link: `/desserts?tableName=${tableNumber}` },
+                        { icon: <CoffeeIcon />, title: "Kahveler", link: `/coffees?tableName=${tableNumber}` },
+                        { icon: <LocalCafeIcon />, title: "Çaylar", link: `/teas?tableName=${tableNumber}` }                    ].map((item, index) => (
                         <Grid item xs={12} sm={6} md={4} key={index}>
                             <Link to={item.link} style={{ textDecoration: 'none' }}>
                                 <motion.div

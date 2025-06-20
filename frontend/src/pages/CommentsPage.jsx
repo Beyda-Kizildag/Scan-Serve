@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Box, Typography, TextField, Button, Grid, Paper, Select, MenuItem, InputLabel, FormControl
+    Box, Typography, TextField, Button, Grid, Paper, Select, MenuItem, InputLabel, FormControl, IconButton
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import HomeIcon from '@mui/icons-material/Home';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function CommentsPage() {
     const [comments, setComments] = useState([]);
@@ -52,14 +54,26 @@ export default function CommentsPage() {
             padding: '2rem',
             background: 'linear-gradient(135deg, #f3e5f5 0%, #fffde4 100%)'
         }}>
-            {/* Title and Filter Row */}
+            {/* Title Row */}
             <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                mb: 4,
-                gap: 2
+                mb: 2,
+                gap: 2,
+                pt: 2,
+                position: 'relative'
             }}>
+                <Link to="/">
+                    <IconButton sx={{
+                        background: '#f8bbd0',
+                        color: '#8e24aa',
+                        mr: 1,
+                        '&:hover': { background: '#f06292' }
+                    }}>
+                        <HomeIcon fontSize="large" />
+                    </IconButton>
+                </Link>
                 <Typography
                     variant="h3"
                     sx={{
@@ -72,7 +86,15 @@ export default function CommentsPage() {
                 >
                     Ürün Yorumları
                 </Typography>
-                <FormControl sx={{ minWidth: 200, ml: 3 }}>
+            </Box>
+            {/* Filter Row */}
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mb: 4
+            }}>
+                <FormControl sx={{ minWidth: 250 }}>
                     <InputLabel>
                         <FilterListIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
                         Yalnızca Bu Ürünü Göster

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
@@ -18,6 +18,11 @@ export default function TeasPage() {
     // Çaylar listesini ve favori durumlarını state olarak tutuyoruz
     const [teas, setTeas] = useState([]);
     const [favorited, setFavorited] = useState({});
+
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const tableNumber = params.get('tableName') ? Number(params.get('tableName')) : 5; // fallback to 5 if not present
+
 
     // Sayfa yüklendiğinde backend'den çayları çekiyoruz
     useEffect(() => {
@@ -128,11 +133,11 @@ export default function TeasPage() {
                 </Typography>
 
                 {/* Sepet ikonu ve ürün sayısı */}
-                <Link to="/cart" className="cart-icon"
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center'
-                    }}
+                <Link to={`/cart?tableName=${tableNumber}`} className="cart-icon"
+                      style={{
+                          display: 'flex',
+                          alignItems: 'center'
+                      }}
                 >
                     <Badge badgeContent={getCartCount()} color="secondary" overlap="circular">
                         <ShoppingCartIcon fontSize="large"
