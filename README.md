@@ -1,4 +1,5 @@
 📱 QR Menü ve Sipariş Takip Uygulaması
+
 Bu proje, restoran ve kafeler için geliştirilen QR kodlu dijital menü ve sipariş takip sistemidir.
 Amaç, kullanıcıların (müşterilerin) masalara yerleştirilen QR kodları mobil cihazlarıyla okutarak menüyü görüntülemelerini ve sipariş verebilmelerini sağlamaktır.
 
